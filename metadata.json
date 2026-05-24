@@ -1,0 +1,8 @@
+{
+  "name": "Alfabeto Manual Digital",
+  "description": "Aplicação interativa de alfabetização e Libras voltada para idosos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
