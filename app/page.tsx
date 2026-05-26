@@ -98,57 +98,31 @@ interface Item {
 
 const ITEMS: Item[] = [
   { id: 1, name: 'ABELHA', letter: 'A', icon: <Bug size={64} />, color: 'bg-yellow-400' },
-  { id: 2, name: 'AVIÃO', letter: 'A', icon: <Plane size={64} />, color: 'bg-sky-400' },
-  { id: 3, name: 'BOLA', letter: 'B', icon: <CircleDot size={64} />, color: 'bg-blue-400' },
-  { id: 4, name: 'BOLO', letter: 'B', icon: <Cake size={64} />, color: 'bg-pink-300' },
-  { id: 5, name: 'CASA', letter: 'C', icon: <Home size={64} />, color: 'bg-red-400' },
-  { id: 6, name: 'CARRO', letter: 'C', icon: <Car size={64} />, color: 'bg-orange-500' },
-  { id: 7, name: 'DADO', letter: 'D', icon: <Dices size={64} />, color: 'bg-white' },
-  { id: 8, name: 'DOCE', letter: 'D', icon: <Cookie size={64} />, color: 'bg-pink-200' },
-  { id: 9, name: 'ESTRELA', letter: 'E', icon: <Star size={64} />, color: 'bg-yellow-300' },
-  { id: 10, name: 'ESCOLA', letter: 'E', icon: <School size={64} />, color: 'bg-emerald-500' },
-  { id: 11, name: 'FLOR', letter: 'F', icon: <Flower2 size={64} />, color: 'bg-pink-400' },
-  { id: 12, name: 'FOGUETE', letter: 'F', icon: <Rocket size={64} />, color: 'bg-sky-500' },
-  { id: 13, name: 'GATO', letter: 'G', icon: <Cat size={64} />, color: 'bg-orange-300' },
-  { id: 14, name: 'GUARDA-CHUVA', letter: 'G', icon: <Umbrella size={64} />, color: 'bg-teal-400' },
-  { id: 15, name: 'HERÓI', letter: 'H', icon: <Shield size={64} />, color: 'bg-rose-500' },
-  { id: 16, name: 'HOMEM', letter: 'H', icon: <User size={64} />, color: 'bg-emerald-400' },
-  { id: 17, name: 'ILHA', letter: 'I', icon: <Trees size={64} />, color: 'bg-cyan-400' },
-  { id: 18, name: 'IGREJA', letter: 'I', icon: <Church size={64} />, color: 'bg-indigo-400' },
-  { id: 19, name: 'JANELA', letter: 'J', icon: <Square size={64} />, color: 'bg-sky-300' },
-  { id: 20, name: 'JACARÉ', letter: 'J', icon: <Waves size={64} />, color: 'bg-green-700' },
-  { id: 21, name: 'KIWI', letter: 'K', icon: <Circle size={64} />, color: 'bg-green-200' },
-  { id: 22, name: 'KART', letter: 'K', icon: <Zap size={64} />, color: 'bg-yellow-500' },
-  { id: 23, name: 'LUA', letter: 'L', icon: <Moon size={64} />, color: 'bg-slate-800' },
-  { id: 24, name: 'LÁPIS', letter: 'L', icon: <Pencil size={64} />, color: 'bg-purple-400' },
-  { id: 25, name: 'MAÇÃ', letter: 'M', icon: <Apple size={64} />, color: 'bg-red-500' },
-  { id: 26, name: 'MÃO', letter: 'M', icon: <Hand size={64} />, color: 'bg-orange-200' },
-  { id: 27, name: 'NAVIO', letter: 'N', icon: <Ship size={64} />, color: 'bg-blue-600' },
-  { id: 28, name: 'NUVEM', letter: 'N', icon: <Cloud size={64} />, color: 'bg-slate-100' },
-  { id: 29, name: 'OVO', letter: 'O', icon: <CircleDot size={64} />, color: 'bg-stone-100' },
-  { id: 30, name: 'ÓCULOS', letter: 'O', icon: <Glasses size={64} />, color: 'bg-indigo-200' },
-  { id: 31, name: 'PATO', letter: 'P', icon: <Bird size={64} />, color: 'bg-yellow-200' },
-  { id: 32, name: 'PEIXE', letter: 'P', icon: <Fish size={64} />, color: 'bg-cyan-400' },
-  { id: 33, name: 'QUEIJO', letter: 'Q', icon: <PieChart size={64} />, color: 'bg-yellow-300' },
-  { id: 34, name: 'QUADRO', letter: 'Q', icon: <ImageIcon size={64} />, color: 'bg-stone-800' },
-  { id: 35, name: 'RATO', letter: 'R', icon: <Mouse size={64} />, color: 'bg-gray-500' },
-  { id: 36, name: 'REI', letter: 'R', icon: <Crown size={64} />, color: 'bg-amber-500' },
-  { id: 37, name: 'SOL', letter: 'S', icon: <Sun size={64} />, color: 'bg-yellow-400' },
-  { id: 38, name: 'SAPO', letter: 'S', icon: <Smile size={64} />, color: 'bg-green-500' },
-  { id: 39, name: 'TREM', letter: 'T', icon: <Train size={64} />, color: 'bg-red-600' },
-  { id: 40, name: 'TELEFONE', letter: 'T', icon: <Phone size={64} />, color: 'bg-cyan-500' },
-  { id: 41, name: 'UVA', letter: 'U', icon: <Grape size={64} />, color: 'bg-purple-600' },
-  { id: 42, name: 'URSO', letter: 'U', icon: <BicepsFlexed size={64} />, color: 'bg-stone-600' },
-  { id: 43, name: 'VELA', letter: 'V', icon: <Flame size={64} />, color: 'bg-orange-400' },
-  { id: 44, name: 'VACA', letter: 'V', icon: <Accessibility size={64} />, color: 'bg-stone-200' },
-  { id: 45, name: 'WAFER', letter: 'W', icon: <Grid3X3 size={64} />, color: 'bg-amber-200' },
-  { id: 46, name: 'WIFI', letter: 'W', icon: <Wifi size={64} />, color: 'bg-sky-300' },
-  { id: 47, name: 'XÍCARA', letter: 'X', icon: <Coffee size={64} />, color: 'bg-slate-400' },
-  { id: 48, name: 'XADREZ', letter: 'X', icon: <Grid3X3 size={64} />, color: 'bg-stone-800' },
-  { id: 49, name: 'YOYO', letter: 'Y', icon: <Circle size={64} />, color: 'bg-purple-400' },
-  { id: 50, name: 'YOGA', letter: 'Y', icon: <Accessibility size={64} />, color: 'bg-blue-300' },
-  { id: 51, name: 'ZEBRA', letter: 'Z', icon: <Grid3X3 size={64} />, color: 'bg-slate-100' },
-  { id: 52, name: 'ZERO', letter: 'Z', icon: <Circle size={64} />, color: 'bg-slate-300' },
+  { id: 2, name: 'BOLA', letter: 'B', icon: <CircleDot size={64} />, color: 'bg-blue-400' },
+  { id: 3, name: 'CASA', letter: 'C', icon: <Home size={64} />, color: 'bg-red-400' },
+  { id: 4, name: 'DADO', letter: 'D', icon: <Dices size={64} />, color: 'bg-white' },
+  { id: 5, name: 'ESTRELA', letter: 'E', icon: <Star size={64} />, color: 'bg-yellow-300' },
+  { id: 6, name: 'FOGUETE', letter: 'F', icon: <Rocket size={64} />, color: 'bg-sky-500' },
+  { id: 7, name: 'GATO', letter: 'G', icon: <Cat size={64} />, color: 'bg-orange-300' },
+  { id: 8, name: 'HERÓI', letter: 'H', icon: <Shield size={64} />, color: 'bg-rose-500' },
+  { id: 9, name: 'ILHA', letter: 'I', icon: <Trees size={64} />, color: 'bg-cyan-400' },
+  { id: 10, name: 'JACARÉ', letter: 'J', icon: <Waves size={64} />, color: 'bg-green-700' },
+  { id: 11, name: 'KIWI', letter: 'K', icon: <Circle size={64} />, color: 'bg-green-200' },
+  { id: 12, name: 'LÁPIS', letter: 'L', icon: <Pencil size={64} />, color: 'bg-purple-400' },
+  { id: 13, name: 'MAÇÃ', letter: 'M', icon: <Apple size={64} />, color: 'bg-red-500' },
+  { id: 14, name: 'NUVEM', letter: 'N', icon: <Cloud size={64} />, color: 'bg-slate-100' },
+  { id: 15, name: 'OVO', letter: 'O', icon: <CircleDot size={64} />, color: 'bg-stone-100' },
+  { id: 16, name: 'PEIXE', letter: 'P', icon: <Fish size={64} />, color: 'bg-cyan-400' },
+  { id: 17, name: 'QUEIJO', letter: 'Q', icon: <PieChart size={64} />, color: 'bg-yellow-300' },
+  { id: 18, name: 'REI', letter: 'R', icon: <Crown size={64} />, color: 'bg-amber-500' },
+  { id: 19, name: 'SOL', letter: 'S', icon: <Sun size={64} />, color: 'bg-yellow-400' },
+  { id: 20, name: 'TREM', letter: 'T', icon: <Train size={64} />, color: 'bg-red-600' },
+  { id: 21, name: 'UVA', letter: 'U', icon: <Grape size={64} />, color: 'bg-purple-600' },
+  { id: 22, name: 'VELA', letter: 'V', icon: <Flame size={64} />, color: 'bg-orange-400' },
+  { id: 23, name: 'WIFI', letter: 'W', icon: <Wifi size={64} />, color: 'bg-sky-300' },
+  { id: 24, name: 'XÍCARA', letter: 'X', icon: <Coffee size={64} />, color: 'bg-slate-400' },
+  { id: 25, name: 'YOYO', letter: 'Y', icon: <Circle size={64} />, color: 'bg-purple-400' },
+  { id: 26, name: 'ZEBRA', letter: 'Z', icon: <Grid3X3 size={64} />, color: 'bg-slate-100' },
 ];
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇ'.split('');
@@ -264,6 +238,11 @@ export default function AlfabetoManualApp() {
       .slice(0, 10 - requiredLetters.length);
     
     setVisibleLetters([...requiredLetters, ...otherLetters].sort());
+    
+    // Auto-select the first item to make game flow natural and modern
+    if (selected.length > 0) {
+      setSelectedItem(selected[0]);
+    }
   }, [completedItems]);
 
   const startGame = () => {
@@ -315,7 +294,7 @@ export default function AlfabetoManualApp() {
     } else {
       setFeedback('WRONG');
       setWrongLetter(letter);
-      setMessage(`❌ Não é a letra "${letter}". Qual começa a palavra "${selectedItem.name}"?`);
+      setMessage(`❌ Não é a letra "${letter}". Qual a letra inicial do desenho "${selectedItem.name}"?`);
       
       // Reset after 1.8 seconds so users can read the helpful feedback
       setTimeout(() => {
@@ -501,38 +480,67 @@ export default function AlfabetoManualApp() {
             {renderHeader()}
             
             <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0 bg-[#FFFBEB]">
-              {/* Items Display: Only show activeItems */}
-              <div className="w-full md:w-[240px] lg:w-[280px] bg-white border-b-2 md:border-b-0 md:border-r-2 border-[#1E293B] shrink-0 h-[64px] xs:h-[72px] sm:h-[80px] md:h-full min-h-0">
-                <div className="flex md:flex-col p-1.5 xs:p-2 md:p-3 gap-1.5 xs:gap-2 md:gap-3 overflow-x-auto md:overflow-y-auto no-scrollbar justify-start h-full select-none">
+              {/* Desktop Items Sidebar: Only visible on md+ screen sizes */}
+              <div className="hidden md:block md:w-[240px] lg:w-[280px] bg-white border-r-2 border-[#1E293B] shrink-0 md:h-full min-h-0">
+                <div className="flex flex-col p-3 gap-3 overflow-y-auto no-scrollbar justify-start h-full select-none">
                   {activeItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => handleSelectItem(item)}
                       className={cn(
-                        "flex-shrink-0 flex items-center gap-2 px-2.5 py-1 sm:px-4 sm:py-2.5 border-2 rounded-xl sm:rounded-2xl transition-all text-left relative cursor-pointer select-none w-[120px] xs:w-[140px] md:w-full h-full md:h-auto",
+                        "flex-shrink-0 flex items-center gap-3 px-4 py-2.5 border-2 rounded-2xl transition-all text-left relative cursor-pointer select-none w-full",
                         selectedItem?.id === item.id 
                           ? "bg-[#FEF9C3] border-[#FACC15] scale-[1.01] shadow-sm z-10" 
                           : "bg-white border-slate-200 hover:border-[#FACC15] shadow-sm"
                       )}
                     >
-                      <div className={cn("w-6 h-6 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl flex items-center justify-center border border-slate-100 shrink-0 [&>svg]:w-3.5 [&>svg]:h-3.5 sm:[&>svg]:w-6 sm:[&>svg]:h-6 text-slate-800", item.color)}>
+                      <div className={cn("w-11 h-11 rounded-xl flex items-center justify-center border border-slate-100 shrink-0 [&>svg]:w-6 [&>svg]:h-6 text-slate-800", item.color)}>
                         {item.icon}
                       </div>
-                      <span className="font-extrabold text-[11px] sm:text-sm md:text-base text-slate-800 tracking-tight uppercase truncate">{item.name}</span>
+                      <span className="font-extrabold text-sm md:text-base text-slate-800 tracking-tight uppercase truncate">{item.name}</span>
                     </button>
                   ))}
-                  <div className="hidden md:flex flex-1 items-center justify-center border-2 border-dashed border-slate-200 rounded-2xl p-4 text-center text-slate-400 font-bold uppercase text-xs lg:text-sm select-none">
+                  <div className="flex flex-1 items-center justify-center border-2 border-dashed border-slate-200 rounded-2xl p-4 text-center text-slate-400 font-bold uppercase text-xs lg:text-sm select-none">
                     {completedItems.length} de 5 concluídos
                   </div>
                 </div>
               </div>
 
-              {/* Central Area: Big Display */}
-              <div className="flex-1 flex flex-col items-center justify-center p-2 sm:p-4 md:p-6 relative overflow-hidden bg-[#FFFBEB] min-h-0">
+              {/* Mobile Symmetric 3-Column Top Bar: perfectly responsive, fits nicely without horizontal scroll */}
+              <div className="w-full bg-white border-b-2 border-[#1E293B] shrink-0 md:hidden p-2 select-none shadow-sm">
+                <div className="grid grid-cols-3 gap-2 h-full">
+                  {activeItems.map((item) => {
+                    const isSelected = selectedItem?.id === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        onClick={() => handleSelectItem(item)}
+                        className={cn(
+                          "flex flex-col items-center justify-center py-1.5 px-0.5 border-2 border-b-[4px] rounded-xl transition-all cursor-pointer select-none",
+                          isSelected 
+                            ? "bg-[#FEF9C3] border-[#FACC15] border-b-[#CA8A04] scale-[1.03] shadow-sm"
+                            : "bg-white border-slate-200 border-b-slate-300 active:translate-y-[2px] active:border-b-2"
+                        )}
+                      >
+                        <div className={cn(
+                          "w-8 h-8 rounded-full flex items-center justify-center border border-slate-100 shrink-0 [&>svg]:w-4.5 [&>svg]:h-4.5 text-slate-800 shadow-sm", 
+                          item.color
+                        )}>
+                          {item.icon}
+                        </div>
+                        <span className="font-black text-[10px] text-slate-700 tracking-tight uppercase truncate max-w-full mt-1.5">{item.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Central Area: Big Interactive Display Card */}
+              <div className="flex-1 flex flex-col items-center justify-center p-2.5 xs:p-3 sm:p-4 md:p-6 relative overflow-hidden bg-[#FFFBEB] min-h-0">
                 <motion.div 
-                  className="w-full max-w-xl max-h-full bg-white border-2 md:border-4 border-[#1E293B] rounded-2xl md:rounded-3xl shadow-md flex flex-col items-center justify-center text-center p-3 sm:p-5 md:p-6 relative overflow-y-auto no-scrollbar shrink min-h-0"
+                  className="w-full max-w-xl max-h-full bg-white border-2 md:border-4 border-[#1E293B] rounded-2xl md:rounded-3xl shadow-md flex flex-col items-center justify-center text-center p-3.5 sm:p-5 md:p-6 relative overflow-y-auto no-scrollbar shrink min-h-0"
                 >
-                  {/* Decorative corner stars like the image board */}
+                  {/* Decorative corner stars */}
                   <div className="absolute top-3 left-3 sm:top-4 sm:left-4 text-xs sm:text-base text-[#FACC15] select-none">⭐</div>
                   <div className="absolute top-3 right-3 sm:top-4 sm:right-4 text-xs sm:text-base text-[#FACC15] select-none">⭐</div>
                   <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 text-xs sm:text-base text-[#FACC15] select-none">⭐</div>
@@ -541,25 +549,46 @@ export default function AlfabetoManualApp() {
                   {selectedItem ? (
                     <motion.div 
                       key={selectedItem.id}
-                      initial={{ scale: 0.8, opacity: 0 }}
+                      initial={{ scale: 0.9, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="flex flex-col gap-1.5 sm:gap-2.5 items-center z-10 w-full min-h-0 shrink"
+                      className="flex flex-col gap-2 sm:gap-3.5 items-center z-10 w-full min-h-0 shrink"
                     >
                       <span className="text-[10px] sm:text-xs font-black text-rose-500 uppercase tracking-widest bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200 shadow-sm animate-pulse shrink-0">
-                        Qual é a primeira letra?
+                        Qual a letra inicial do desenho?
                       </span>
-                      <h2 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#1E293B] uppercase tracking-normal truncate leading-none max-w-full px-2 mt-1 sm:mt-1.5 shrink-0">
-                        {selectedItem.name}
+                      
+                      {/* Interactive spelling blank style: e.g. _ B E L H A or A B E L H A representation */}
+                      <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black text-[#1E293B] uppercase tracking-wider flex items-center justify-center gap-1.5 sm:gap-2 shrink-0 select-none">
+                        <span className={cn(
+                          "border-b-4 pb-0.5 transition-all text-center min-w-[28px] xs:min-w-[34px]",
+                          feedback === 'CORRECT' 
+                            ? "text-emerald-500 border-emerald-500 font-extrabold animate-bounce" 
+                            : "text-rose-500 border-rose-500 animate-pulse font-extrabold"
+                        )}>
+                          {feedback === 'CORRECT' ? selectedItem.letter : '_'}
+                        </span>
+                        <span className="text-slate-700 tracking-wide">
+                          {selectedItem.name.substring(1)}
+                        </span>
                       </h2>
                       
-                      <div className="flex flex-row gap-3 sm:gap-6 md:gap-8 items-center justify-center mt-2 w-full max-w-full min-h-0 shrink">
-                        {/* Word Icon */}
-                        <div className={cn("w-12 h-12 xs:w-16 xs:h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-2 border-[#1E293B] flex items-center justify-center shadow-sm shrink-0 [&>svg]:w-6 xs:[&>svg]:w-8 sm:[&>svg]:w-10 md:[&>svg]:w-12 [&>svg]:h-6 xs:[&>svg]:h-8 sm:[&>svg]:h-10 md:[&>svg]:h-12 text-slate-800", selectedItem.color)}>
+                      <div className="flex flex-row gap-3 sm:gap-8 md:gap-10 items-center justify-center mt-1 sm:mt-2.5 w-full max-w-full min-h-0 shrink">
+                        {/* Drawing Illustration Badge */}
+                        <motion.div 
+                          whileHover={{ scale: 1.05 }}
+                          className={cn(
+                            "w-14 h-14 xs:w-16 xs:h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 sm:border-4 border-[#1E293B] flex items-center justify-center shadow-md shrink-0 transition-transform [&>svg]:w-7 xs:[&>svg]:w-9 sm:[&>svg]:w-14 md:[&>svg]:w-16 [&>svg]:h-7 xs:[&>svg]:h-9 sm:[&>svg]:h-14 md:[&>svg]:h-16 text-slate-800", 
+                            selectedItem.color
+                          )}
+                        >
                           {selectedItem.icon}
-                        </div>
+                        </motion.div>
                         
-                        {/* Signal Display */}
-                        <div className="w-[85px] h-[105px] xs:w-[100px] xs:h-[125px] sm:w-[130px] sm:h-[162px] md:w-[150px] md:h-[187px] bg-white border-2 border-dashed border-[#38BDF8] rounded-xl sm:rounded-2xl flex flex-col items-center justify-center p-1.5 sm:p-2 shadow-inner relative overflow-hidden shrink-0">
+                        {/* Libras Hand Representation */}
+                        <motion.div 
+                          whileHover={{ scale: 1.05 }}
+                          className="w-[90px] h-[115px] xs:w-[105px] xs:h-[135px] sm:w-[135px] sm:h-[168px] md:w-[155px] md:h-[192px] bg-white border-2 border-dashed border-[#38BDF8] rounded-2xl flex flex-col items-center justify-center p-1.5 sm:p-2 shadow-inner relative overflow-hidden shrink-0 transition-transform"
+                        >
                            <div className="relative w-full h-full min-h-0">
                               <LibrasImage 
                                 key={selectedItem.letter}
@@ -568,8 +597,8 @@ export default function AlfabetoManualApp() {
                                 className="object-contain"
                               />
                            </div>
-                           <span className="text-[7px] xs:text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-[#38BDF8] mt-1 select-none shrink-0">Sinal: {selectedItem.letter}</span>
-                        </div>
+                           <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-black uppercase tracking-widest text-[#0284C7] mt-1.5 select-none shrink-0 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-100">Sinal: {selectedItem.letter}</span>
+                        </motion.div>
                       </div>
                     </motion.div>
                   ) : (
@@ -623,30 +652,30 @@ export default function AlfabetoManualApp() {
             </div>
 
             {/* Bottom Letter Panel */}
-            <div className="w-full bg-[#1E293B] border-t-2 border-[#FACC15] py-2 sm:py-3.5 px-3 sm:px-4 flex items-center shrink-0 shadow-[0px_-4px_20px_rgba(0,0,0,0.25)] select-none">
+            <div className="w-full bg-[#1E293B] border-t-2 border-[#FACC15] py-2 sm:py-3.5 px-3 sm:px-4 flex items-center shrink-0 shadow-[0px_-4px_20px_rgba(0,0,0,0.25)] select-none animate-fade-in-up">
               <div className="w-full max-w-4xl mx-auto flex flex-col gap-1.5 xs:gap-2">
                 
-                {/* Visual guidelines for the student */}
+                {/* Instruction Banner overlay for kids */}
                 <div className="text-center text-[9px] xs:text-[10px] sm:text-xs font-black text-[#FACC15] uppercase tracking-wider animate-pulse select-none">
                   {selectedItem 
-                    ? `👉 Toque na letra inicial de "${selectedItem.name}":` 
-                    : "👈 Primeiro, toque em um desenho da lista!"
+                    ? `👉 Toque na letra de "${selectedItem.name}":` 
+                    : "👈 Toque em um desenho acima para começar!"
                   }
                 </div>
 
-                {/* Responsive Grid for letter buttons on Mobile */}
+                {/* Responsive Grid for keyboard buttons on Mobile */}
                 <div className="grid grid-cols-5 gap-1.5 md:hidden">
                   {visibleLetters.map((letter) => (
                     <button
                       key={letter}
                       onClick={() => handleLetterClick(letter)}
                       className={cn(
-                        "w-full h-10 xs:h-11 rounded-lg flex items-center justify-center text-sm xs:text-base font-bold transition-all select-none border-b-2 cursor-pointer",
+                        "w-full h-10 xs:h-11 rounded-xl flex items-center justify-center text-sm xs:text-base font-black transition-all select-none border-b-4 cursor-pointer",
                         selectedItem?.letter === letter && feedback === 'CORRECT'
-                          ? "bg-[#22C55E] border-[#166534] text-white translate-y-0.5"
+                          ? "bg-emerald-500 border-b-emerald-700 text-white translate-y-[2px] border-b-0"
                           : (wrongLetter === letter 
-                              ? "bg-[#EF4444] border-[#B91C1C] text-white animate-shake" 
-                              : "bg-[#FACC15] border-[#CA8A04] text-[#1E293B] active:translate-y-0.5 active:border-b-0")
+                              ? "bg-rose-500 border-b-rose-700 text-white animate-shake" 
+                              : "bg-[#FACC15] border-[#CA8A04] hover:bg-[#FDE047] text-[#1E293B] active:translate-y-[2px] active:border-b-2")
                       )}
                     >
                       {letter}
@@ -654,19 +683,19 @@ export default function AlfabetoManualApp() {
                   ))}
                 </div>
 
-                {/* Fine Desktop Row structure for letter buttons */}
+                {/* Keyboard buttons on Desktop */}
                 <div className="hidden md:flex md:justify-center md:gap-2 md:flex-wrap">
                   {visibleLetters.map((letter) => (
                     <button
                       key={letter}
                       onClick={() => handleLetterClick(letter)}
                       className={cn(
-                        "w-[38px] h-[48px] lg:w-[44px] lg:h-[55px] border-b-4 rounded-lg flex items-center justify-center text-base lg:text-lg font-bold transition-all select-none cursor-pointer",
+                        "w-[38px] h-[48px] lg:w-[44px] lg:h-[55px] border-b-4 rounded-xl flex items-center justify-center text-base lg:text-lg font-black transition-all select-none cursor-pointer",
                         selectedItem?.letter === letter && feedback === 'CORRECT'
-                          ? "bg-[#22C55E] border-[#166534] text-white translate-y-0.5"
+                          ? "bg-emerald-500 border-emerald-700 text-white translate-y-[2px] border-b-2"
                           : (wrongLetter === letter 
-                              ? "bg-[#EF4444] border-[#B91C1C] text-white animate-shake" 
-                              : "bg-[#FACC15] border-[#CA8A04] text-[#1E293B] active:translate-y-[2px] active:border-b-2")
+                              ? "bg-rose-500 border-rose-700 text-white animate-shake" 
+                              : "bg-[#FACC15] border-[#CA8A04] hover:bg-[#FDE047] text-[#1E293B] active:translate-y-[2px] active:border-b-2")
                       )}
                     >
                       {letter}
