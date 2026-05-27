@@ -8,11 +8,12 @@ interface LibrasImageProps {
   letter: string;
   alt: string;
   className?: string;
+  imageUrl?: string;
 }
 
 type SourceKind = "svg" | "png" | "font";
 
-export function LibrasImage({ alt, className, letter }: LibrasImageProps) {
+export function LibrasImage({ alt, className, imageUrl = "", letter }: LibrasImageProps) {
   const upperLetter = letter.toUpperCase();
   const [sourceKind, setSourceKind] = useState<SourceKind>("svg");
   const isCedilha = upperLetter === "Ç";
@@ -22,8 +23,12 @@ export function LibrasImage({ alt, className, letter }: LibrasImageProps) {
   }, [upperLetter]);
 
   const source = useMemo(() => {
-    return sourceKind === "font" ? null : getLocalLibrasSource(upperLetter, sourceKind);
-  }, [sourceKind, upperLetter]);
+    if (sourceKind === "font") {
+      return null;
+    }
+
+    return imageUrl || getLocalLibrasSource(upperLetter, sourceKind);
+  }, [imageUrl, sourceKind, upperLetter]);
 
   const handleError = () => {
     setSourceKind((current) => (current === "svg" ? "png" : "font"));

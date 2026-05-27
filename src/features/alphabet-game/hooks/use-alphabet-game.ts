@@ -1,16 +1,17 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 import { ALPHABET_ITEMS } from "../data/alphabet-items";
 import { createConfettiPieces } from "../lib/confetti";
-import { COMPLETION_TARGET, FEEDBACK_CLEAR_DELAY } from "../lib/constants";
-import { createRound, isCorrectLetter, isGameComplete } from "../lib/game-rules";
+import { FEEDBACK_CLEAR_DELAY } from "../lib/constants";
+import { createRound, getCompletionTarget, isCorrectLetter } from "../lib/game-rules";
 import type { AlphabetItem, GameView } from "../types";
 import { INITIAL_GAME_STATE, alphabetGameReducer } from "./game-state-reducer";
 export type { AlphabetGameState } from "./game-state-reducer";
 
-export function useAlphabetGame() {
+export function useAlphabetGame(items: AlphabetItem[] = ALPHABET_ITEMS) {
   const [state, dispatch] = useReducer(alphabetGameReducer, INITIAL_GAME_STATE);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const confetti = useMemo(() => createConfettiPieces(), []);
+  const progressTarget = useMemo(() => getCompletionTarget(items), [items]);
 
   const clearTimers = useCallback(() => {
     timers.current.forEach(clearTimeout);
@@ -22,9 +23,9 @@ export function useAlphabetGame() {
     timers.current.push(timer);
   }, []);
 
-  const buildRound = useCallback((completedItemIds: number[] = []) => {
-    return createRound(ALPHABET_ITEMS, completedItemIds);
-  }, []);
+  const buildRound = useCallback((completedItemIds: string[] = []) => {
+    return createRound(items, completedItemIds);
+  }, [items]);
 
   const navigateTo = useCallback((view: GameView) => {
     clearTimers();
@@ -83,7 +84,7 @@ export function useAlphabetGame() {
     });
 
     schedule(() => {
-      if (isGameComplete(completedItemIds.length)) {
+      if (completedItemIds.length >= progressTarget) {
         dispatch({ type: "celebrate", completedItemIds });
         return;
       }
@@ -94,14 +95,20 @@ export function useAlphabetGame() {
         round: buildRound(completedItemIds),
       });
     }, FEEDBACK_CLEAR_DELAY.correct);
-  }, [buildRound, clearTimers, schedule, state]);
+  }, [buildRound, clearTimers, progressTarget, schedule, state]);
 
   useEffect(() => clearTimers, [clearTimers]);
+
+  useEffect(() => {
+    if (state.currentView === "GAME" && state.activeItems.length === 0 && items.length > 0) {
+      dispatch({ type: "restart", round: createRound(items, []) });
+    }
+  }, [items, state.activeItems.length, state.currentView]);
 
   return {
     state,
     confetti,
-    progressTarget: COMPLETION_TARGET,
+    progressTarget,
     actions: {
       chooseLetter,
       navigateTo,

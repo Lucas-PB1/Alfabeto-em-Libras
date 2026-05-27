@@ -1,0 +1,39 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function cmsRole(role) {
+      return signedIn()
+        && request.auth.token.cmsAccess == true
+        && request.auth.token.role == role;
+    }
+
+    function cmsEditor() {
+      return cmsRole("admin") || cmsRole("editor");
+    }
+
+    match /alphabet/{letter} {
+      allow read: if true;
+      allow write: if cmsEditor();
+    }
+
+    match /words/{wordId} {
+      allow read: if true;
+      allow write: if cmsEditor();
+    }
+
+    match /users/{userId} {
+      allow create: if signedIn() && request.auth.uid == userId;
+      allow read: if cmsRole("admin") || (signedIn() && request.auth.uid == userId);
+      allow update: if cmsRole("admin")
+        || (signedIn()
+          && request.auth.uid == userId
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["name", "photoUrl", "updatedAt"]));
+      allow delete: if false;
+    }
+  }
+}

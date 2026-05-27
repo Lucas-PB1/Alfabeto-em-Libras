@@ -16,7 +16,7 @@ export function shuffleItems<T>(items: readonly T[], random: RandomSource = Math
 
 export function createRound(
   items: readonly AlphabetItem[],
-  completedItemIds: readonly number[],
+  completedItemIds: readonly string[],
   random: RandomSource = Math.random,
 ): GameRound {
   const completedSet = new Set(completedItemIds);
@@ -46,4 +46,8 @@ export function isCorrectLetter(item: AlphabetItem | null, letter: string) {
 
 export function isGameComplete(completedCount: number) {
   return completedCount >= COMPLETION_TARGET;
+}
+
+export function getCompletionTarget(items: readonly AlphabetItem[]) {
+  return Math.min(COMPLETION_TARGET, items.length);
 }

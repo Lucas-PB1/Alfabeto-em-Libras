@@ -2,11 +2,13 @@ import { Hand, Play } from "lucide-react";
 import { motion } from "motion/react";
 
 interface HomeViewProps {
+  contentError?: string;
+  loading?: boolean;
   onOpenReference: () => void;
   onStart: () => void;
 }
 
-export function HomeView({ onOpenReference, onStart }: HomeViewProps) {
+export function HomeView({ contentError = "", loading = false, onOpenReference, onStart }: HomeViewProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -54,6 +56,17 @@ export function HomeView({ onOpenReference, onStart }: HomeViewProps) {
           <Hand size={18} className="shrink-0" />
         </button>
       </div>
+
+      {contentError && (
+        <p className="text-xs font-bold text-rose-600 bg-rose-50 px-3 py-2 rounded-lg border border-rose-100">
+          {contentError}
+        </p>
+      )}
+      {loading && !contentError && (
+        <p className="text-[11px] font-black uppercase tracking-wide text-slate-400">
+          Sincronizando conteúdo
+        </p>
+      )}
     </motion.div>
   );
 }

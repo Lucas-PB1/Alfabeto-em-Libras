@@ -2,7 +2,7 @@ import type { AlphabetItem, FeedbackStatus, GameRound, GameView } from "../types
 
 export interface AlphabetGameState extends GameRound {
   currentView: GameView;
-  completedItemIds: number[];
+  completedItemIds: string[];
   feedback: FeedbackStatus;
   wrongLetter: string | null;
   message: string;
@@ -15,8 +15,8 @@ export type AlphabetGameAction =
   | { type: "select-item"; item: AlphabetItem }
   | { type: "show-feedback"; feedback: Exclude<FeedbackStatus, "NONE">; message: string; wrongLetter?: string }
   | { type: "clear-feedback" }
-  | { type: "advance"; completedItemIds: number[]; round: GameRound }
-  | { type: "celebrate"; completedItemIds: number[] };
+  | { type: "advance"; completedItemIds: string[]; round: GameRound }
+  | { type: "celebrate"; completedItemIds: string[] };
 
 export const INITIAL_GAME_STATE: AlphabetGameState = {
   currentView: "HOME",

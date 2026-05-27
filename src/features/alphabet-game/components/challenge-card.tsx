@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/shared/lib/cn";
 import type { AlphabetItem, FeedbackStatus } from "../types";
 import { LibrasImage } from "./libras-image";
+import { WordVisual } from "./word-visual";
 
 interface ChallengeCardProps {
   feedback: FeedbackStatus;
@@ -38,8 +39,6 @@ export function ChallengeCard({ feedback, selectedItem }: ChallengeCardProps) {
 }
 
 function SelectedChallenge({ feedback, item }: { feedback: FeedbackStatus; item: AlphabetItem }) {
-  const Icon = item.icon;
-
   return (
     <motion.div
       key={item.id}
@@ -68,12 +67,9 @@ function SelectedChallenge({ feedback, item }: { feedback: FeedbackStatus; item:
       <div className="flex flex-row gap-3 sm:gap-8 md:gap-10 items-center justify-center mt-1 sm:mt-2.5 w-full max-w-full min-h-0 shrink">
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className={cn(
-            "w-14 h-14 xs:w-16 xs:h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-2 sm:border-4 border-[#1E293B] flex items-center justify-center shadow-md shrink-0 transition-transform text-slate-800",
-            item.colorClass,
-          )}
+          className="transition-transform"
         >
-          <Icon className="w-7 h-7 xs:w-9 xs:h-9 sm:w-14 sm:h-14 md:w-16 md:h-16" />
+          <WordVisual item={item} className="border-2 sm:border-4 border-[#1E293B] shadow-md" />
         </motion.div>
 
         <motion.div

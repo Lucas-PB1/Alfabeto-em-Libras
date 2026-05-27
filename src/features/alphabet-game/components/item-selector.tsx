@@ -1,10 +1,11 @@
 import { cn } from "@/shared/lib/cn";
 import type { AlphabetItem } from "../types";
+import { WordVisual } from "./word-visual";
 
 interface ItemSelectorProps {
   completedCount: number;
   items: AlphabetItem[];
-  selectedItemId?: number;
+  selectedItemId?: string;
   targetCount: number;
   onSelect: (item: AlphabetItem) => void;
 }
@@ -17,8 +18,6 @@ interface ItemButtonProps {
 }
 
 function ItemButton({ compact = false, item, onSelect, selected }: ItemButtonProps) {
-  const Icon = item.icon;
-
   if (compact) {
     return (
       <button
@@ -32,12 +31,7 @@ function ItemButton({ compact = false, item, onSelect, selected }: ItemButtonPro
             : "bg-white border-slate-200 border-b-slate-300 active:translate-y-[2px] active:border-b-2",
         )}
       >
-        <div className={cn(
-          "w-8 h-8 rounded-full flex items-center justify-center border border-slate-100 shrink-0 text-slate-800 shadow-sm",
-          item.colorClass,
-        )}>
-          <Icon size={18} />
-        </div>
+        <WordVisual compact item={item} />
         <span className="font-black text-[10px] text-slate-700 tracking-tight uppercase truncate max-w-full mt-1.5">
           {item.name}
         </span>
@@ -57,12 +51,7 @@ function ItemButton({ compact = false, item, onSelect, selected }: ItemButtonPro
           : "bg-white border-slate-200 hover:border-[#FACC15] shadow-sm",
       )}
     >
-      <div className={cn(
-        "w-11 h-11 rounded-xl flex items-center justify-center border border-slate-100 shrink-0 text-slate-800",
-        item.colorClass,
-      )}>
-        <Icon size={26} />
-      </div>
+      <WordVisual item={item} className="w-11 h-11 rounded-xl" />
       <span className="font-extrabold text-sm md:text-base text-slate-800 tracking-tight uppercase truncate">
         {item.name}
       </span>

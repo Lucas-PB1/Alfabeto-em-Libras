@@ -2,6 +2,7 @@
 
 import { AnimatePresence } from "motion/react";
 import { cn } from "@/shared/lib/cn";
+import { useAlphabetContent } from "../hooks/use-alphabet-content";
 import { useAlphabetGame } from "../hooks/use-alphabet-game";
 import { CelebrationView } from "./celebration-view";
 import { GameView } from "./game-view";
@@ -9,7 +10,8 @@ import { HomeView } from "./home-view";
 import { ReferenceView } from "./reference-view";
 
 export function AlphabetGameApp() {
-  const { actions, confetti, progressTarget, state } = useAlphabetGame();
+  const { content, error, loading } = useAlphabetContent();
+  const { actions, confetti, progressTarget, state } = useAlphabetGame(content.words);
 
   return (
     <main
@@ -22,13 +24,19 @@ export function AlphabetGameApp() {
         {state.currentView === "HOME" && (
           <HomeView
             key="home"
+            contentError={error}
+            loading={loading}
             onOpenReference={() => actions.navigateTo("REFERENCE")}
             onStart={actions.startGame}
           />
         )}
 
         {state.currentView === "REFERENCE" && (
-          <ReferenceView key="reference" onBack={() => actions.navigateTo("HOME")} />
+          <ReferenceView
+            key="reference"
+            letters={content.letters}
+            onBack={() => actions.navigateTo("HOME")}
+          />
         )}
 
         {state.currentView === "GAME" && (

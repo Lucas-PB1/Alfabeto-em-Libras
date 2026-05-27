@@ -1,12 +1,13 @@
 import { motion } from "motion/react";
-import { ALPHABET } from "../lib/constants";
+import type { AlphabetLetter } from "@/features/alphabet/types";
 import { LibrasImage } from "./libras-image";
 
 interface ReferenceViewProps {
+  letters: AlphabetLetter[];
   onBack: () => void;
 }
 
-export function ReferenceView({ onBack }: ReferenceViewProps) {
+export function ReferenceView({ letters, onBack }: ReferenceViewProps) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -28,17 +29,22 @@ export function ReferenceView({ onBack }: ReferenceViewProps) {
       </div>
 
       <div className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 gap-2 sm:gap-3 w-full pb-10">
-        {ALPHABET.map((letter) => (
+        {letters.map((item) => (
           <motion.div
-            key={letter}
+            key={item.id}
             whileHover={{ scale: 1.04 }}
             className="bg-white border-2 border-dashed border-[#38BDF8] p-2 sm:p-3 rounded-xl sm:rounded-2xl aspect-square shadow-sm flex flex-col items-center justify-center gap-1 relative group overflow-hidden"
           >
             <div className="text-sm sm:text-base font-black text-[#F43F5E] absolute top-1 right-2">
-              {letter}
+              {item.letter}
             </div>
             <div className="relative w-full h-full p-1">
-              <LibrasImage letter={letter} alt={`Sinal da letra ${letter}`} className="object-contain" />
+              <LibrasImage
+                letter={item.letter}
+                imageUrl={item.librasImage}
+                alt={`Sinal da letra ${item.letter}`}
+                className="object-contain"
+              />
             </div>
             <div className="absolute inset-0 border-2 border-[#38BDF8] rounded-xl sm:rounded-2xl opacity-10 pointer-events-none group-hover:opacity-30 transition-opacity" />
           </motion.div>
