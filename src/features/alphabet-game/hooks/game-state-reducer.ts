@@ -12,7 +12,7 @@ export type AlphabetGameAction =
   | { type: "navigate"; view: GameView }
   | { type: "start"; round: GameRound }
   | { type: "restart"; round: GameRound }
-  | { type: "select-item"; item: AlphabetItem }
+  | { type: "select-item"; item: AlphabetItem; visibleLetters: string[] }
   | { type: "show-feedback"; feedback: Exclude<FeedbackStatus, "NONE">; message: string; wrongLetter?: string }
   | { type: "clear-feedback" }
   | { type: "advance"; completedItemIds: string[]; round: GameRound }
@@ -50,7 +50,11 @@ export function alphabetGameReducer(
     case "restart":
       return { ...INITIAL_GAME_STATE, ...action.round, currentView: "GAME" };
     case "select-item":
-      return { ...withClearedFeedback(state), selectedItem: action.item };
+      return {
+        ...withClearedFeedback(state),
+        selectedItem: action.item,
+        visibleLetters: action.visibleLetters,
+      };
     case "show-feedback":
       return {
         ...state,

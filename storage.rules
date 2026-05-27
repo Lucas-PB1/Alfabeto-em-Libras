@@ -12,22 +12,33 @@ service firebase.storage {
         && request.auth.token.role in ["admin", "editor"];
     }
 
-    function validImage() {
+    function validImage(contentType) {
       return request.resource != null
         && request.resource.size < 3 * 1024 * 1024
-        && request.resource.contentType.matches("image/.*");
+        && request.resource.contentType == contentType;
+    }
+
+    function validAlphabetImage() {
+      return request.resource != null
+        && request.resource.size < 3 * 1024 * 1024
+        && request.resource.contentType in ["image/webp", "image/svg+xml"];
+    }
+
+    match /cms/alphabet/{fileName} {
+      allow read: if true;
+      allow write: if cmsEditor() && validAlphabetImage();
     }
 
     match /cms/{allPaths=**} {
       allow read: if true;
-      allow write: if cmsEditor() && validImage();
+      allow write: if cmsEditor() && validImage("image/webp");
     }
 
     match /users/{userId}/profile/{fileName} {
       allow read: if signedIn() && (request.auth.uid == userId || request.auth.token.role == "admin");
       allow write: if signedIn()
         && (request.auth.uid == userId || request.auth.token.role == "admin")
-        && validImage();
+        && validImage("image/webp");
     }
   }
 }

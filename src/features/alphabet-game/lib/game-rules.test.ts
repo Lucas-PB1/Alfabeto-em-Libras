@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { ALPHABET_ITEMS } from "../data/alphabet-items";
-import { COMPLETION_TARGET } from "./constants";
-import { createRound, isGameComplete } from "./game-rules";
+import { ACTIVE_ITEM_COUNT, COMPLETION_TARGET, VISIBLE_LETTER_COUNT } from "./constants";
+import { createRound, createVisibleLettersForItem, isGameComplete } from "./game-rules";
 import { getLibrasChar } from "./libras";
 
 const stableRandom = () => 0.42;
@@ -15,27 +15,30 @@ describe("alphabet game rules", () => {
     expect(round.activeItems.every((item) => !completedIds.includes(item.id))).toBe(true);
   });
 
-  it("selects up to three active items for a round", () => {
+  it("selects a broad picture board for a round", () => {
     const round = createRound(ALPHABET_ITEMS, [], stableRandom);
 
     expect(round.activeItems.length).toBeGreaterThan(0);
-    expect(round.activeItems.length).toBeLessThanOrEqual(3);
-    expect(round.selectedItem).toBe(round.activeItems[0]);
+    expect(round.activeItems.length).toBeLessThanOrEqual(ACTIVE_ITEM_COUNT);
+    expect(round.selectedItem).toBeNull();
+    expect(round.visibleLetters).toEqual([]);
   });
 
-  it("includes all required letters in the visible keyboard", () => {
+  it("builds a focused keyboard only after choosing an item", () => {
     const round = createRound(ALPHABET_ITEMS, [], stableRandom);
-    const requiredLetters = round.activeItems.map((item) => item.letter);
+    const selectedItem = round.activeItems[0];
+    const visibleLetters = createVisibleLettersForItem(selectedItem, stableRandom);
 
-    expect(round.visibleLetters).toEqual(expect.arrayContaining(requiredLetters));
-    expect(round.visibleLetters).toHaveLength(10);
+    expect(visibleLetters).toContain(selectedItem.letter);
+    expect(visibleLetters).toHaveLength(VISIBLE_LETTER_COUNT);
   });
 
   it("does not duplicate visible letters", () => {
     const round = createRound(ALPHABET_ITEMS, [], stableRandom);
-    const uniqueLetters = new Set(round.visibleLetters);
+    const visibleLetters = createVisibleLettersForItem(round.activeItems[0], stableRandom);
+    const uniqueLetters = new Set(visibleLetters);
 
-    expect(uniqueLetters.size).toBe(round.visibleLetters.length);
+    expect(uniqueLetters.size).toBe(visibleLetters.length);
   });
 
   it("keeps the completion target at five correct answers", () => {

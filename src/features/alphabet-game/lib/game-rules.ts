@@ -27,17 +27,25 @@ export function createRound(
   }
 
   const activeItems = shuffleItems(remainingItems, random).slice(0, ACTIVE_ITEM_COUNT);
-  const requiredLetters = Array.from(new Set(activeItems.map((item) => item.letter)));
-  const fillerLetters = shuffleItems(
-    ALPHABET.filter((letter) => !requiredLetters.includes(letter)),
-    random,
-  ).slice(0, VISIBLE_LETTER_COUNT - requiredLetters.length);
 
   return {
     activeItems,
-    visibleLetters: [...requiredLetters, ...fillerLetters].sort((a, b) => a.localeCompare(b, "pt-BR")),
-    selectedItem: activeItems[0] ?? null,
+    visibleLetters: [],
+    selectedItem: null,
   };
+}
+
+export function createVisibleLettersForItem(
+  item: AlphabetItem,
+  random: RandomSource = Math.random,
+) {
+  const selectedLetter = item.letter;
+  const fillerLetters = shuffleItems(
+    ALPHABET.filter((letter) => letter !== selectedLetter),
+    random,
+  ).slice(0, VISIBLE_LETTER_COUNT - 1);
+
+  return [selectedLetter, ...fillerLetters].sort((a, b) => a.localeCompare(b, "pt-BR"));
 }
 
 export function isCorrectLetter(item: AlphabetItem | null, letter: string) {

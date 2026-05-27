@@ -1,6 +1,8 @@
 export const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZÇ".split("");
 
-export const ACTIVE_ITEM_COUNT = 3;
+export const ACTIVE_ITEM_COUNT = 20;
+
+export const MOBILE_ITEM_COUNT = 6;
 
 export const VISIBLE_LETTER_COUNT = 10;
 

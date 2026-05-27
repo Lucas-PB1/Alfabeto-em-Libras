@@ -2,7 +2,12 @@ import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 import { ALPHABET_ITEMS } from "../data/alphabet-items";
 import { createConfettiPieces } from "../lib/confetti";
 import { FEEDBACK_CLEAR_DELAY } from "../lib/constants";
-import { createRound, getCompletionTarget, isCorrectLetter } from "../lib/game-rules";
+import {
+  createRound,
+  createVisibleLettersForItem,
+  getCompletionTarget,
+  isCorrectLetter,
+} from "../lib/game-rules";
 import type { AlphabetItem, GameView } from "../types";
 import { INITIAL_GAME_STATE, alphabetGameReducer } from "./game-state-reducer";
 export type { AlphabetGameState } from "./game-state-reducer";
@@ -44,7 +49,11 @@ export function useAlphabetGame(items: AlphabetItem[] = ALPHABET_ITEMS) {
 
   const selectItem = useCallback((item: AlphabetItem) => {
     clearTimers();
-    dispatch({ type: "select-item", item });
+    dispatch({
+      type: "select-item",
+      item,
+      visibleLetters: createVisibleLettersForItem(item),
+    });
   }, [clearTimers]);
 
   const chooseLetter = useCallback((letter: string) => {

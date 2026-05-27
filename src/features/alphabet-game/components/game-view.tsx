@@ -23,6 +23,8 @@ export function GameView({
   progressTarget,
   state,
 }: GameViewProps) {
+  const canChooseLetter = Boolean(state.selectedItem && state.visibleLetters.length > 0);
+
   return (
     <div className="w-full h-full flex flex-col overflow-hidden">
       <GameHeader
@@ -32,28 +34,30 @@ export function GameView({
         onRestart={onRestart}
       />
 
-      <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0 bg-[#FFFBEB]">
+      <div className="flex-1 overflow-hidden min-h-0 bg-[#F8F5E8] p-2 sm:p-3 md:p-4">
         <ItemSelector
           completedCount={state.completedItemIds.length}
           items={state.activeItems}
           selectedItemId={state.selectedItem?.id}
           targetCount={progressTarget}
           onSelect={onSelectItem}
-        />
-
-        <div className="flex-1 flex flex-col items-center justify-center p-2.5 xs:p-3 sm:p-4 md:p-6 relative overflow-hidden bg-[#FFFBEB] min-h-0">
-          <ChallengeCard feedback={state.feedback} selectedItem={state.selectedItem} />
-          <FeedbackToast feedback={state.feedback} message={state.message} />
-        </div>
+        >
+          <div className="relative flex h-full min-h-[180px] w-full items-center justify-center p-2 md:min-h-[220px] md:p-3">
+            <ChallengeCard feedback={state.feedback} selectedItem={state.selectedItem} />
+            <FeedbackToast feedback={state.feedback} message={state.message} />
+          </div>
+        </ItemSelector>
       </div>
 
-      <LetterKeyboard
-        feedback={state.feedback}
-        letters={state.visibleLetters}
-        selectedItem={state.selectedItem}
-        wrongLetter={state.wrongLetter}
-        onChooseLetter={onChooseLetter}
-      />
+      {canChooseLetter && (
+        <LetterKeyboard
+          feedback={state.feedback}
+          letters={state.visibleLetters}
+          selectedItem={state.selectedItem}
+          wrongLetter={state.wrongLetter}
+          onChooseLetter={onChooseLetter}
+        />
+      )}
     </div>
   );
 }
