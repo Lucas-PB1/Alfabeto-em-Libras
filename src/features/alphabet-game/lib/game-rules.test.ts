@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { ALPHABET_ITEMS } from "../data/alphabet-items";
 import { ACTIVE_ITEM_COUNT, COMPLETION_TARGET, VISIBLE_LETTER_COUNT } from "./constants";
 import { createRound, createVisibleLettersForItem, isGameComplete } from "./game-rules";
-import { getLibrasChar } from "./libras";
+import { getLibrasChar, getLocalLibrasSource } from "./libras";
 
 const stableRandom = () => 0.42;
 
@@ -49,5 +49,11 @@ describe("alphabet game rules", () => {
 
   it("maps cedilha to the Libras fallback font character", () => {
     expect(getLibrasChar("Ç")).toBe("ç");
+    expect(getLibrasChar("C\u0327")).toBe("ç");
+  });
+
+  it("encodes cedilha local image paths", () => {
+    expect(getLocalLibrasSource("Ç", "svg")).toBe("/libras/%C3%87.svg");
+    expect(getLocalLibrasSource("C\u0327", "svg")).toBe("/libras/%C3%87.svg");
   });
 });

@@ -13,6 +13,7 @@ export type AlphabetGameAction =
   | { type: "start"; round: GameRound }
   | { type: "restart"; round: GameRound }
   | { type: "select-item"; item: AlphabetItem; visibleLetters: string[] }
+  | { type: "sync-items"; items: AlphabetItem[]; visibleLetters?: string[] }
   | { type: "show-feedback"; feedback: Exclude<FeedbackStatus, "NONE">; message: string; wrongLetter?: string }
   | { type: "clear-feedback" }
   | { type: "advance"; completedItemIds: string[]; round: GameRound }
@@ -55,6 +56,24 @@ export function alphabetGameReducer(
         selectedItem: action.item,
         visibleLetters: action.visibleLetters,
       };
+    case "sync-items": {
+      const itemsById = new Map(action.items.map((item) => [item.id, item]));
+      const activeItems = state.activeItems
+        .map((item) => itemsById.get(item.id) ?? item)
+        .filter((item) => item.active);
+      const selectedItem = state.selectedItem ? itemsById.get(state.selectedItem.id) ?? null : null;
+
+      if (selectedItem && selectedItem.active) {
+        return {
+          ...state,
+          activeItems,
+          selectedItem,
+          visibleLetters: action.visibleLetters ?? state.visibleLetters,
+        };
+      }
+
+      return { ...withClearedFeedback(state), activeItems, selectedItem: null, visibleLetters: [] };
+    }
     case "show-feedback":
       return {
         ...state,

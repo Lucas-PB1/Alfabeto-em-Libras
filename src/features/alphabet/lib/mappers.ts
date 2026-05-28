@@ -13,7 +13,7 @@ interface AlphabetDoc {
 export function mapAlphabetDoc(id: string, data: AlphabetDoc): AlphabetLetter {
   return {
     id,
-    letter: (data.letter ?? id).toUpperCase(),
+    letter: (data.letter ?? id).normalize("NFC").toUpperCase(),
     librasImage: data.librasImage ?? "",
     active: data.active ?? true,
     order: data.order ?? 0,

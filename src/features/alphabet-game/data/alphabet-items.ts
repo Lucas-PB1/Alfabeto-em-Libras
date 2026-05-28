@@ -35,6 +35,7 @@ function item(letter: string, name: string, iconKey: string, colorClass: string)
     id: `word-${letter.toLowerCase()}`,
     name,
     letter,
+    librasImage: "",
     visualType: "icon",
     image: "",
     iconKey,

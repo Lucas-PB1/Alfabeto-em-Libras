@@ -16,8 +16,8 @@ interface WordDoc {
 export function mapWordDoc(id: string, data: WordDoc): WordContent {
   return {
     id,
-    name: (data.name ?? "").toUpperCase(),
-    letter: (data.letter ?? "").toUpperCase(),
+    name: (data.name ?? "").normalize("NFC").toUpperCase(),
+    letter: (data.letter ?? "").normalize("NFC").toUpperCase(),
     visualType: data.visualType ?? "icon",
     image: data.image ?? "",
     iconKey: data.iconKey ?? "Circle",

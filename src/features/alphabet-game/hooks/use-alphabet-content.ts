@@ -64,7 +64,7 @@ export function useAlphabetContent() {
   }, []);
 
   return useMemo(() => ({
-    content: { letters, words: getActiveGameItems(words) },
+    content: { letters, words: getActiveGameItems(words, letters) },
     error,
     loading,
   }), [error, letters, loading, words]);

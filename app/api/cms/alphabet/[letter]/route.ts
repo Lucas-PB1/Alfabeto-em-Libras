@@ -13,7 +13,7 @@ export async function PATCH(request: Request, context: RouteContext) {
     await requireCmsUser(request);
     const { letter } = await context.params;
     const body = alphabetUpdateSchema.parse(await request.json());
-    const normalizedLetter = decodeURIComponent(letter).toUpperCase();
+    const normalizedLetter = decodeURIComponent(letter).normalize("NFC").toUpperCase();
 
     await getAdminDb().collection("alphabet").doc(normalizedLetter).set({
       ...body,

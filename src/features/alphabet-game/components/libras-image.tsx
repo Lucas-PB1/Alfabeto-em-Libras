@@ -11,27 +11,46 @@ interface LibrasImageProps {
   imageUrl?: string;
 }
 
-type SourceKind = "svg" | "png" | "font";
+type SourceStage = "cms" | "local-svg" | "local-png" | "font";
 
 export function LibrasImage({ alt, className, imageUrl = "", letter }: LibrasImageProps) {
-  const upperLetter = letter.toUpperCase();
-  const [sourceKind, setSourceKind] = useState<SourceKind>("svg");
+  const upperLetter = letter.normalize("NFC").toUpperCase();
+  const normalizedImageUrl = imageUrl.trim();
+  const [sourceStage, setSourceStage] = useState<SourceStage>(() => getInitialSourceStage(normalizedImageUrl));
   const isCedilha = upperLetter === "Ç";
 
   useEffect(() => {
-    setSourceKind("svg");
-  }, [upperLetter]);
+    setSourceStage(getInitialSourceStage(normalizedImageUrl));
+  }, [normalizedImageUrl, upperLetter]);
 
   const source = useMemo(() => {
-    if (sourceKind === "font") {
-      return null;
+    if (sourceStage === "cms") {
+      return normalizedImageUrl;
     }
 
-    return imageUrl || getLocalLibrasSource(upperLetter, sourceKind);
-  }, [imageUrl, sourceKind, upperLetter]);
+    if (sourceStage === "local-svg") {
+      return getLocalLibrasSource(upperLetter, "svg");
+    }
+
+    if (sourceStage === "local-png") {
+      return getLocalLibrasSource(upperLetter, "png");
+    }
+
+    return null;
+  }, [normalizedImageUrl, sourceStage, upperLetter]);
 
   const handleError = () => {
-    setSourceKind((current) => (current === "svg" ? "png" : "font"));
+    setSourceStage((current) => {
+      if (current === "cms") {
+        return "local-svg";
+      }
+
+      if (current === "local-svg") {
+        return "local-png";
+      }
+
+      return "font";
+    });
   };
 
   return (
@@ -66,4 +85,8 @@ export function LibrasImage({ alt, className, imageUrl = "", letter }: LibrasIma
       </div>
     </motion.div>
   );
+}
+
+function getInitialSourceStage(imageUrl: string): SourceStage {
+  return imageUrl ? "cms" : "local-svg";
 }

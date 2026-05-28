@@ -1,8 +1,12 @@
 export function getLibrasChar(letter: string) {
-  const upper = letter.toUpperCase();
+  const upper = normalizeLetter(letter);
   return upper === "Ç" ? "ç" : upper;
 }
 
 export function getLocalLibrasSource(letter: string, extension: "svg" | "png") {
-  return `/libras/${letter.toUpperCase()}.${extension}`;
+  return `/libras/${encodeURIComponent(normalizeLetter(letter))}.${extension}`;
+}
+
+function normalizeLetter(letter: string) {
+  return letter.normalize("NFC").toUpperCase();
 }

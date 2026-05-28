@@ -114,6 +114,19 @@ export function useAlphabetGame(items: AlphabetItem[] = ALPHABET_ITEMS) {
     }
   }, [items, state.activeItems.length, state.currentView]);
 
+  useEffect(() => {
+    if (state.currentView === "GAME" && state.activeItems.length > 0) {
+      const latestSelectedItem = state.selectedItem
+        ? items.find((item) => item.id === state.selectedItem?.id)
+        : null;
+      const visibleLetters = latestSelectedItem && latestSelectedItem.letter !== state.selectedItem?.letter
+        ? createVisibleLettersForItem(latestSelectedItem)
+        : undefined;
+
+      dispatch({ type: "sync-items", items, visibleLetters });
+    }
+  }, [items, state.activeItems.length, state.currentView, state.selectedItem]);
+
   return {
     state,
     confetti,

@@ -11,8 +11,8 @@ export async function POST(request: Request) {
 
     await getAdminDb().collection("words").add({
       ...body,
-      name: body.name.toUpperCase(),
-      letter: body.letter.toUpperCase(),
+      name: body.name.normalize("NFC").toUpperCase(),
+      letter: body.letter.normalize("NFC").toUpperCase(),
       createdAt: FieldValue.serverTimestamp(),
       updatedAt: FieldValue.serverTimestamp(),
     });

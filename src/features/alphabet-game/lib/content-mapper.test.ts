@@ -25,4 +25,17 @@ describe("alphabet content mapper", () => {
   it("filters inactive words", () => {
     expect(getActiveGameItems([word, { ...word, id: "off", active: false }])).toHaveLength(1);
   });
+
+  it("attaches the CMS Libras image for the word letter", () => {
+    const [item] = getActiveGameItems([{ ...word, letter: "c\u0327" }], [{
+      id: "a",
+      active: true,
+      letter: "Ç",
+      librasImage: "https://example.com/cedilha.webp",
+      order: 0,
+    }]);
+
+    expect(item.letter).toBe("Ç");
+    expect(item.librasImage).toBe("https://example.com/cedilha.webp");
+  });
 });

@@ -15,8 +15,8 @@ export async function PATCH(request: Request, context: RouteContext) {
     const body = wordPatchSchema.parse(await request.json());
     const patch = {
       ...body,
-      ...(body.name ? { name: body.name.toUpperCase() } : {}),
-      ...(body.letter ? { letter: body.letter.toUpperCase() } : {}),
+      ...(body.name ? { name: body.name.normalize("NFC").toUpperCase() } : {}),
+      ...(body.letter ? { letter: body.letter.normalize("NFC").toUpperCase() } : {}),
       updatedAt: FieldValue.serverTimestamp(),
     };
 

@@ -9,6 +9,7 @@ export interface AlphabetItem {
   id: string;
   name: string;
   letter: string;
+  librasImage: string;
   visualType: "image" | "icon";
   image: string;
   iconKey: string;

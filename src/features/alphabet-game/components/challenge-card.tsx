@@ -77,7 +77,7 @@ function SelectedChallenge({ feedback, item }: { feedback: FeedbackStatus; item:
           className="w-[90px] h-[115px] xs:w-[105px] xs:h-[135px] sm:w-[135px] sm:h-[168px] md:w-[155px] md:h-[192px] bg-white border-2 border-dashed border-[#38BDF8] rounded-2xl flex flex-col items-center justify-center p-1.5 sm:p-2 shadow-inner relative overflow-hidden shrink-0 transition-transform"
         >
           <div className="relative w-full h-full min-h-0">
-            <LibrasImage letter={item.letter} alt={`Sinal Libras para ${item.letter}`} />
+            <LibrasImage letter={item.letter} imageUrl={item.librasImage} alt={`Sinal Libras para ${item.letter}`} />
           </div>
           <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-black uppercase tracking-widest text-[#0284C7] mt-1.5 select-none shrink-0 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-100">
             Sinal: {item.letter}
