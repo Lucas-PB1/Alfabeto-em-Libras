@@ -69,7 +69,7 @@ export function CmsAuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error("Sessão expirada.");
     }
 
-    const token = await currentUser.getIdToken();
+    const token = await currentUser.getIdToken(true);
     const headers = new Headers(init.headers);
     headers.set("Authorization", `Bearer ${token}`);
 
