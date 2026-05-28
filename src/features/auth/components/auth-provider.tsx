@@ -26,6 +26,10 @@ interface CmsAuthContextValue {
 
 const CmsAuthContext = createContext<CmsAuthContextValue | null>(null);
 
+interface ApiErrorPayload {
+  error?: string;
+}
+
 export function CmsAuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -51,6 +55,9 @@ export function CmsAuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error(data.error ?? "Não foi possível validar o acesso.");
     }
 
+    // The session route may have just changed custom claims used by Storage rules.
+    await currentUser.getIdToken(true);
+
     setProfile(data.profile);
     return data.profile as UserProfile;
   }, []);
@@ -66,7 +73,13 @@ export function CmsAuthProvider({ children }: { children: React.ReactNode }) {
     const headers = new Headers(init.headers);
     headers.set("Authorization", `Bearer ${token}`);
 
-    return fetch(path, { ...init, headers });
+    const response = await fetch(path, { ...init, headers });
+
+    if (!response.ok) {
+      throw new Error(await readApiError(response));
+    }
+
+    return response;
   }, []);
 
   useEffect(() => {
@@ -129,4 +142,13 @@ export function useCmsAuth() {
   }
 
   return context;
+}
+
+async function readApiError(response: Response) {
+  try {
+    const data = (await response.json()) as ApiErrorPayload;
+    return data.error || "Não foi possível concluir a ação.";
+  } catch {
+    return "Não foi possível concluir a ação.";
+  }
 }

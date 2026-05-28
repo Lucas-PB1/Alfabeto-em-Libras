@@ -17,6 +17,9 @@ export function useUsers(enabled = true) {
       return;
     }
 
+    setLoading(true);
+    setError("");
+
     const unsubscribe = onSnapshot(
       collection(getFirebaseDb(), "users"),
       (snapshot) => {

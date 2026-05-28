@@ -3,9 +3,16 @@ import { cn } from "@/shared/lib/cn";
 export function CmsButton({
   children,
   className,
+  disabled,
+  loading = false,
+  loadingText,
   tone = "primary",
   ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & { tone?: "primary" | "quiet" | "danger" }) {
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  loading?: boolean;
+  loadingText?: string;
+  tone?: "primary" | "quiet" | "danger";
+}) {
   const tones = {
     danger: "bg-rose-600 text-white hover:bg-rose-700 border-rose-700",
     primary: "bg-slate-950 text-white hover:bg-slate-800 border-slate-950",
@@ -15,6 +22,7 @@ export function CmsButton({
   return (
     <button
       type="button"
+      disabled={disabled || loading}
       className={cn(
         "inline-flex h-10 items-center justify-center gap-2 rounded-lg border px-4 text-sm font-bold transition disabled:cursor-not-allowed disabled:opacity-60",
         tones[tone],
@@ -22,7 +30,8 @@ export function CmsButton({
       )}
       {...props}
     >
-      {children}
+      {loading && <CmsSpinner />}
+      {loading && loadingText ? loadingText : children}
     </button>
   );
 }
@@ -76,7 +85,7 @@ export function CmsField({
   );
 }
 
-export function CmsInput({ className, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
+export function CmsInput({ className, ...props }: React.ComponentPropsWithRef<"input">) {
   return (
     <input
       className={cn(
@@ -129,10 +138,31 @@ export function CmsTable({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function CmsStatus({ text }: { text: string }) {
+export function CmsStatus({
+  text,
+  tone = "info",
+}: {
+  text: string;
+  tone?: "danger" | "info" | "success";
+}) {
+  const tones = {
+    danger: "border-rose-200 bg-rose-50 text-rose-700",
+    info: "border-sky-200 bg-sky-50 text-sky-800",
+    success: "border-emerald-200 bg-emerald-50 text-emerald-700",
+  };
+
   return (
-    <div className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-600">
+    <div className={cn("rounded-lg border px-3 py-2 text-sm font-semibold", tones[tone])} role="status">
       {text}
     </div>
+  );
+}
+
+export function CmsSpinner({ className }: { className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn("h-4 w-4 rounded-full border-2 border-current border-r-transparent animate-spin", className)}
+    />
   );
 }

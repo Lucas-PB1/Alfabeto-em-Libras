@@ -1,7 +1,8 @@
 "use client";
 
+import { FirebaseError } from "firebase/app";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { getFirebaseStorage } from "./client";
+import { getFirebaseAuth, getFirebaseStorage } from "./client";
 
 const MAX_SOURCE_IMAGE_SIZE = 10 * 1024 * 1024;
 const MAX_UPLOAD_IMAGE_SIZE = 3 * 1024 * 1024;
@@ -21,17 +22,33 @@ export function validateImageFile(file: File) {
 }
 
 export async function uploadCmsImage(file: File, folder: string) {
-  const validationError = validateImageFile(file);
+  try {
+    await refreshUploadToken();
 
-  if (validationError) {
-    throw new Error(validationError);
+    const validationError = validateImageFile(file);
+
+    if (validationError) {
+      throw new Error(validationError);
+    }
+
+    const uploadFile = await prepareImageForUpload(file, folder);
+    const fileName = `${Date.now()}-${uploadFile.fileName}`;
+    const fileRef = ref(getFirebaseStorage(), `${folder}/${fileName}`);
+    await uploadBytes(fileRef, uploadFile.blob, { contentType: uploadFile.contentType });
+    return getDownloadURL(fileRef);
+  } catch (error) {
+    throw normalizeUploadError(error);
+  }
+}
+
+async function refreshUploadToken() {
+  const currentUser = getFirebaseAuth().currentUser;
+
+  if (!currentUser) {
+    throw new Error("Sessão expirada. Entre novamente no CMS.");
   }
 
-  const uploadFile = await prepareImageForUpload(file, folder);
-  const fileName = `${Date.now()}-${uploadFile.fileName}`;
-  const fileRef = ref(getFirebaseStorage(), `${folder}/${fileName}`);
-  await uploadBytes(fileRef, uploadFile.blob, { contentType: uploadFile.contentType });
-  return getDownloadURL(fileRef);
+  await currentUser.getIdToken(true);
 }
 
 async function prepareImageForUpload(file: File, folder: string) {
@@ -125,4 +142,24 @@ function sanitizeFileName(fileName: string) {
 
 function sanitizeBaseFileName(fileName: string) {
   return sanitizeFileName(fileName.replace(/\.[^.]+$/, ""));
+}
+
+function normalizeUploadError(error: unknown) {
+  if (error instanceof FirebaseError) {
+    if (error.code === "storage/unauthorized") {
+      return new Error("Você não tem permissão para enviar imagens. Entre novamente ou confirme se seu usuário está aprovado como admin/editor.");
+    }
+
+    if (error.code === "storage/canceled") {
+      return new Error("Envio cancelado.");
+    }
+
+    return new Error("Não foi possível enviar a imagem. Tente novamente.");
+  }
+
+  if (error instanceof Error) {
+    return error;
+  }
+
+  return new Error("Não foi possível enviar a imagem.");
 }
