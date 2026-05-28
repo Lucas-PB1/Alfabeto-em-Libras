@@ -13,13 +13,14 @@ export async function PATCH(request: Request, context: RouteContext) {
     await requireCmsUser(request);
     const { id } = await context.params;
     const body = wordPatchSchema.parse(await request.json());
-
-    await getAdminDb().collection("words").doc(id).set({
+    const patch = {
       ...body,
-      name: body.name?.toUpperCase(),
-      letter: body.letter?.toUpperCase(),
+      ...(body.name ? { name: body.name.toUpperCase() } : {}),
+      ...(body.letter ? { letter: body.letter.toUpperCase() } : {}),
       updatedAt: FieldValue.serverTimestamp(),
-    }, { merge: true });
+    };
+
+    await getAdminDb().collection("words").doc(id).set(patch, { merge: true });
 
     return NextResponse.json({ ok: true });
   } catch (error) {

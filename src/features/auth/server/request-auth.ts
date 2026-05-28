@@ -40,7 +40,8 @@ export function authErrorResponse(error: unknown) {
     return NextResponse.json({ error: error.message }, { status: error.status });
   }
 
-  return NextResponse.json({ error: "Não foi possível validar a sessão." }, { status: 500 });
+  console.error("CMS request failed", getSafeAuthError(error));
+  return NextResponse.json({ error: "Não foi possível concluir a ação." }, { status: 500 });
 }
 
 function getBearerToken(request: Request) {
